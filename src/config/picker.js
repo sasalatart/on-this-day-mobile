@@ -22,9 +22,9 @@ const now = new Date();
 const INITIAL_VALUE = [MONTHS[now.getMonth()], now.getDate()];
 
 const MAIN_FONT_COLOR = [255, 255, 255, 1];
-const TITLE_COLOR = [0, 0, 0, 1];
-const PICKER_TOOLBAR_COLOR = [207, 0, 15, 0.75];
-const PICKER_BACKGROUND_COLOR = [242, 38, 19, 0.75];
+const TITLE_COLOR = [255, 166, 49, 1];
+const PICKER_TOOLBAR_COLOR = [31, 71, 136, 0.75];
+const PICKER_BACKGROUND_COLOR = [75, 119, 190, 0.75];
 
 const TOOLBAR_OPTIONS = {
   pickerTitleText: 'Select A Date',
