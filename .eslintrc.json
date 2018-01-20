@@ -1,0 +1,20 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "react-native/react-native": true
+  },
+  "plugins": [
+    "react",
+    "react-native"
+  ],
+  "overrides": {
+    "files": ["*.test.js"],
+    "globals": {
+      "it": true,
+      "expect": true
+    }
+  },
+  "rules": {
+    "react/jsx-filename-extension": 0
+  }
+}
