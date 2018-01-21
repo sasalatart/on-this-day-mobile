@@ -5,6 +5,7 @@ import {
   getMonth,
 } from '../store/ducks/dates';
 import DateSelect from '../components/DateSelect';
+import { goToEpisodes } from '../store/ducks/router';
 
 function mapStateToProps(state) {
   return {
@@ -15,6 +16,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   setDate,
+  goToEpisodes,
 };
 
 export default connect(
