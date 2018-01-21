@@ -4,8 +4,9 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import Picker from 'react-native-picker';
-import { OPTIONS, VALUES } from '../config/picker';
+import { OPTIONS, PICKER_DATA } from '../config/picker';
 import Button from './Button';
 
 const styles = StyleSheet.create({
@@ -37,7 +38,8 @@ export default class DateSelect extends Component {
 
     this.picker = Picker.init({
       ...OPTIONS,
-      ...VALUES,
+      pickerData: PICKER_DATA,
+      selectedValue: [this.props.month, this.props.day],
       onPickerConfirm: () => {
         this.setState({ isPickerShown: false });
       },
@@ -45,7 +47,7 @@ export default class DateSelect extends Component {
         this.setState({ isPickerShown: false });
       },
       onPickerSelect: (date) => {
-        console.log(date);
+        this.props.setDate(...date);
       },
     });
     Picker.show();
@@ -73,3 +75,9 @@ export default class DateSelect extends Component {
     );
   }
 }
+
+DateSelect.propTypes = {
+  day: PropTypes.number.isRequired,
+  month: PropTypes.string.isRequired,
+  setDate: PropTypes.func.isRequired,
+};

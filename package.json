@@ -14,11 +14,19 @@
     "preset": "react-native"
   },
   "dependencies": {
+    "immutable": "^3.8.2",
     "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
     "react": "16.0.0",
     "react-native": "0.50.3",
-    "react-native-picker": "^4.3.5"
+    "react-native-picker": "^4.3.5",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-persist": "^5.5.0",
+    "redux-persist-transform-immutable": "^4.3.0",
+    "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
     "babel-preset-react-native-stage-0": "^1.0.1",
