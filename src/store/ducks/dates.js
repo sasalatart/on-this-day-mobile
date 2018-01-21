@@ -7,7 +7,7 @@ const INITIAL_STATE = new Map({
   day: CURRENT_DAY,
 });
 
-export const TYPES = {
+const TYPES = {
   SET_DATE: 'dates/SET_DATE',
 };
 

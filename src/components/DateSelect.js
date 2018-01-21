@@ -42,7 +42,7 @@ export default class DateSelect extends Component {
       selectedValue: [this.props.month, this.props.day],
       onPickerConfirm: () => {
         this.setState({ isPickerShown: false });
-        this.props.goToEpisodes();
+        this.props.loadEpisodes(this.props.month, this.props.day);
       },
       onPickerCancel: () => {
         this.setState({ isPickerShown: false });
@@ -81,5 +81,5 @@ DateSelect.propTypes = {
   day: PropTypes.number.isRequired,
   month: PropTypes.string.isRequired,
   setDate: PropTypes.func.isRequired,
-  goToEpisodes: PropTypes.func.isRequired,
+  loadEpisodes: PropTypes.func.isRequired,
 };

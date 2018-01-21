@@ -4,6 +4,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import Spinner from '../Spinner';
 import Button from '../Button';
 
 const styles = StyleSheet.create({
@@ -16,7 +17,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Episodes({ goToDateSelect }) {
+export default function Episodes({ isLoading, goToDateSelect }) {
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <View style={styles.wrapper}>
       <Button text="Go To Date Select" onPress={goToDateSelect} style={styles.button} />
@@ -25,5 +30,6 @@ export default function Episodes({ goToDateSelect }) {
 }
 
 Episodes.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
   goToDateSelect: PropTypes.func.isRequired,
 };

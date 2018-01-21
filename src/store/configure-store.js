@@ -5,6 +5,7 @@ import immutableTransform from 'redux-persist-transform-immutable';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux';
+import promiseMiddleware from 'redux-promise-middleware';
 import createHistory from 'history/createMemoryHistory';
 import root from './ducks';
 
@@ -21,6 +22,7 @@ export const history = createHistory();
 const middleware = [
   thunkMiddleware,
   routerMiddleware(history),
+  promiseMiddleware(),
 ];
 
 export default () => {
