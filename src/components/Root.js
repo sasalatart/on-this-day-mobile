@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import configureStore, { history } from '../store/configure-store';
 import BackgroundWrapper from '../components/BackgroundWrapper';
 import DateSelect from '../containers/DateSelect';
-import Episodes from '../containers/Episodes';
+import DateContainer from '../containers/Date';
 
 const { store, persistor } = configureStore();
 
@@ -17,7 +17,7 @@ export default function Root() {
         <ConnectedRouter history={history}>
           <BackgroundWrapper>
             <Route exact path="/" component={DateSelect} />
-            <Route path="/episodes" component={Episodes} />
+            <Route path="/date" component={DateContainer} />
           </BackgroundWrapper>
         </ConnectedRouter>
       </PersistGate>

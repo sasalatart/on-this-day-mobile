@@ -2,11 +2,11 @@ import { push } from 'react-router-redux';
 
 const ROUTES = {
   DATE_SELECT: '/',
-  EPISODES: '/episodes',
+  DATE: '/date',
 };
 
-export function goToEpisodes() {
-  return push(ROUTES.EPISODES);
+export function goToDate() {
+  return push(ROUTES.DATE);
 }
 
 export function goToDateSelect() {

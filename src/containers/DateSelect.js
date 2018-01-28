@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
 import {
   setDate,
-  getDay,
-  getMonth,
+  loadEpisodes,
+  getCurrentDay,
+  getCurrentMonth,
 } from '../store/ducks/dates';
 import DateSelect from '../components/DateSelect';
-import { loadEpisodes } from '../store/ducks/episodes';
 
 function mapStateToProps(state) {
   return {
-    day: getDay(state),
-    month: getMonth(state),
+    currentDay: getCurrentDay(state),
+    currentMonth: getCurrentMonth(state),
   };
 }
 

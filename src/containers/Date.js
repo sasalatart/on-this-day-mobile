@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { goToDateSelect } from '../store/ducks/router';
-import { getIsLoading } from '../store/ducks/episodes';
-import Episodes from '../components/Episodes';
+import { getIsLoading } from '../store/ducks/dates';
+import DateComponent from '../components/Date';
 
 function mapStateToProps(state) {
   return {
@@ -16,4 +16,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Episodes);
+)(DateComponent);

@@ -39,10 +39,10 @@ export default class DateSelect extends Component {
     this.picker = Picker.init({
       ...OPTIONS,
       pickerData: PICKER_DATA,
-      selectedValue: [this.props.month, this.props.day],
+      selectedValue: [this.props.currentMonth, this.props.currentDay],
       onPickerConfirm: () => {
         this.setState({ isPickerShown: false });
-        this.props.loadEpisodes(this.props.month, this.props.day);
+        this.props.loadEpisodes(this.props.currentMonth, this.props.currentDay);
       },
       onPickerCancel: () => {
         this.setState({ isPickerShown: false });
@@ -78,8 +78,8 @@ export default class DateSelect extends Component {
 }
 
 DateSelect.propTypes = {
-  day: PropTypes.number.isRequired,
-  month: PropTypes.string.isRequired,
+  currentDay: PropTypes.number.isRequired,
+  currentMonth: PropTypes.string.isRequired,
   setDate: PropTypes.func.isRequired,
   loadEpisodes: PropTypes.func.isRequired,
 };
