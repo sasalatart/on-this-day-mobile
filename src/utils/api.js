@@ -1,11 +1,13 @@
-import axios from 'axios';
 import URI from 'urijs';
 
-axios.defaults.baseURL = 'https://onthisday.salatart.com/api';
+const BASE_URL = 'https://onthisdaynext.salatart.com/api';
+
+function getRequest(url) {
+  return fetch(url).then(response => response.json());
+}
 
 function loadEpisodes(month, day) {
-  const url = URI('/episodes').query({ month, day }).toString();
-  return axios.get(url);
+  return getRequest(URI(`${BASE_URL}/episodes`).query({ month, day }).toString());
 }
 
 export default {

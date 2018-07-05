@@ -39,7 +39,7 @@ export function loadEpisodes(monthName, day) {
       type: TYPES.LOAD,
       payload: api
         .loadEpisodes(month, day)
-        .then(({ data }) => normalize(data, datesSchema)),
+        .then(data => normalize(data, datesSchema)),
     });
     dispatch(goToDate());
   };
