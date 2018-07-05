@@ -6,8 +6,9 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Picker from 'react-native-picker';
-import { OPTIONS, PICKER_DATA } from '../config/picker';
 import Button from './Button';
+import { OPTIONS, PICKER_DATA } from '../config/picker';
+import { CURRENT_MONTH, CURRENT_DAY } from '../utils/dates';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -39,16 +40,13 @@ export default class DateSelect extends Component {
     this.picker = Picker.init({
       ...OPTIONS,
       pickerData: PICKER_DATA,
-      selectedValue: [this.props.currentMonth, this.props.currentDay],
-      onPickerConfirm: () => {
+      selectedValue: [CURRENT_MONTH, CURRENT_DAY],
+      onPickerConfirm: (date) => {
         this.setState({ isPickerShown: false });
-        this.props.loadEpisodes(this.props.currentMonth, this.props.currentDay);
+        this.props.loadEpisodes(...date);
       },
       onPickerCancel: () => {
         this.setState({ isPickerShown: false });
-      },
-      onPickerSelect: (date) => {
-        this.props.setDate(...date);
       },
     });
     Picker.show();
@@ -78,8 +76,5 @@ export default class DateSelect extends Component {
 }
 
 DateSelect.propTypes = {
-  currentDay: PropTypes.number.isRequired,
-  currentMonth: PropTypes.string.isRequired,
-  setDate: PropTypes.func.isRequired,
   loadEpisodes: PropTypes.func.isRequired,
 };

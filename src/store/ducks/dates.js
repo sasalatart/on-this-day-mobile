@@ -1,35 +1,18 @@
 import { Map } from 'immutable';
 import { normalize } from 'normalizr';
 import { createSelector } from 'reselect';
-import {
-  MONTHS,
-  CURRENT_MONTH,
-  CURRENT_DAY,
-} from '../../utils/dates';
-import api from '../../utils/api';
 import { goToDate } from './router';
 import { datesSchema } from '../../schemas';
+import { MONTHS } from '../../utils/dates';
+import api from '../../utils/api';
 
 const INITIAL_STATE = new Map({
-  currentMonth: CURRENT_MONTH,
-  currentDay: CURRENT_DAY,
   isLoading: false,
 });
 
 const TYPES = {
-  SET_CURRENT: 'dates/SET_CURRENT',
   LOAD: 'dates/LOAD',
 };
-
-export function setDate(currentMonth, currentDay) {
-  return {
-    type: TYPES.SET_CURRENT,
-    payload: {
-      currentMonth,
-      currentDay,
-    },
-  };
-}
 
 export function loadEpisodes(monthName, day) {
   const month = MONTHS.findIndex(monthData => monthData[0] === monthName) + 1;
@@ -41,16 +24,12 @@ export function loadEpisodes(monthName, day) {
         .loadEpisodes(month, day)
         .then(data => normalize(data, datesSchema)),
     });
-    dispatch(goToDate());
+    dispatch(goToDate(month, day));
   };
 }
 
 export default function datesReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case TYPES.SET_CURRENT: {
-      const { currentDay, currentMonth } = action.payload;
-      return state.merge({ currentDay, currentMonth });
-    }
     case `${TYPES.LOAD}_PENDING`:
       return state.set('isLoading', true);
     case `${TYPES.LOAD}_FULFILLED`:
@@ -62,16 +41,6 @@ export default function datesReducer(state = INITIAL_STATE, action) {
 }
 
 export const getDatesState = state => state.dates;
-
-export const getCurrentDay = createSelector(
-  getDatesState,
-  datesState => datesState.get('currentDay'),
-);
-
-export const getCurrentMonth = createSelector(
-  getDatesState,
-  datesState => datesState.get('currentMonth'),
-);
 
 export const getIsLoading = createSelector(
   getDatesState,
