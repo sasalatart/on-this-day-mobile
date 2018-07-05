@@ -1,5 +1,10 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import {
+  View,
+  Image,
+  StyleSheet,
+  StatusBar,
+} from 'react-native';
 import PropTypes from 'prop-types';
 
 const source = require('../assets/images/books.jpg');
@@ -18,6 +23,7 @@ const styles = StyleSheet.create({
 export default function BackgroundWrapper(props) {
   return (
     <View style={styles.wrapper}>
+      <StatusBar barStyle="light-content" />
       <Image style={styles.image} source={source} />
       {props.children}
     </View>
