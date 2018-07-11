@@ -3,7 +3,10 @@ import { View, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import Tabs from 'react-native-tabs';
 import keyMirror from 'keymirror';
+import URI from 'urijs';
 import Spinner from './Spinner';
+import NavBar from '../containers/NavBar';
+import { monthNumberToName } from '../utils/dates';
 
 const styles = StyleSheet.create({
   loadingContainer: {
@@ -52,11 +55,20 @@ function renderTab(type) {
 export default class Date extends Component {
   static propTypes = {
     isLoading: PropTypes.bool.isRequired,
+    location: PropTypes.shape({
+      search: PropTypes.string.isRequired,
+    }).isRequired,
   }
 
   state = { page: EPISODES_TYPES.events };
 
   handleTabSelect = element => this.setState({ page: element.props.name });
+
+  renderNavBar() {
+    const { month, day } = URI.parseQuery(this.props.location.search);
+    const title = `${monthNumberToName(month)} ${day}`;
+    return <NavBar title={title} />;
+  }
 
   render() {
     if (this.props.isLoading) {
@@ -69,6 +81,8 @@ export default class Date extends Component {
 
     return (
       <View style={styles.container}>
+        {this.renderNavBar()}
+
         <Tabs
           selected={this.state.page}
           onSelect={this.handleTabSelect}
@@ -79,8 +93,6 @@ export default class Date extends Component {
           {renderTab(EPISODES_TYPES.births)}
           {renderTab(EPISODES_TYPES.deaths)}
         </Tabs>
-
-        <Text>{this.state.page}</Text>
       </View>
     );
   }

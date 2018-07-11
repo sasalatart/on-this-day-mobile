@@ -14,5 +14,10 @@ export const MONTHS = [
 ];
 
 const now = new Date();
-export const CURRENT_MONTH = MONTHS[now.getMonth()][0];
+
+export function monthNumberToName(number) {
+  return MONTHS[number - 1][0];
+}
+
+export const CURRENT_MONTH = monthNumberToName(now.getMonth() + 1);
 export const CURRENT_DAY = now.getDate();
