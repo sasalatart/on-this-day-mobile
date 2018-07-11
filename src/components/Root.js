@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { Route } from 'react-router-native';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import configureStore, { history } from '../store/configure-store';
 import BackgroundWrapper from '../components/BackgroundWrapper';
 import DateSelect from '../containers/DateSelect';

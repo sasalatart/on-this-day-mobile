@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import immutableTransform from 'redux-persist-transform-immutable';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
-import { routerMiddleware } from 'react-router-redux';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 import promiseMiddleware from 'redux-promise-middleware';
 import createHistory from 'history/createMemoryHistory';
 import root from './ducks';
@@ -15,9 +15,8 @@ const persistConfig = {
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, root);
-
 export const history = createHistory();
+const persistedReducer = persistReducer(persistConfig, connectRouter(history)(root));
 
 const middleware = [
   thunkMiddleware,
