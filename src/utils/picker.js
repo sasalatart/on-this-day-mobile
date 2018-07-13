@@ -37,7 +37,7 @@ const PICKER_OPTIONS = {
   onPickerSelect: noop,
 };
 
-export default class CustomPicker {
+class CustomPicker {
   constructor(params) {
     const finalOptions = { ...TOOLBAR_OPTIONS, ...PICKER_OPTIONS, ...params };
 
@@ -50,8 +50,7 @@ export default class CustomPicker {
       select: finalOptions.onPickerSelect,
     };
 
-    // There are no `removeListener` for NativeAppEventEmitter & DeviceEventEmitter
-    if (this.listener) this.listener.remove();
+    this.disconnect();
     this.listener = NativeAppEventEmitter.addListener('pickerEvent', (event) => {
       fnConf[event.type](event.selectedValue, event.selectedIndex);
       if (event.type === 'cancel') params.onPickerHide();
@@ -59,6 +58,11 @@ export default class CustomPicker {
 
     this.onPickerShow = params.onPickerShow;
     this.onPickerHide = params.onPickerHide;
+  }
+
+  disconnect() {
+    // There are no `removeListener` for NativeAppEventEmitter & DeviceEventEmitter
+    if (this.listener) this.listener.remove();
   }
 
   show() {
@@ -69,5 +73,17 @@ export default class CustomPicker {
   hide() {
     Picker.hide();
     this.onPickerHide();
+  }
+}
+
+export default class PickerService {
+  static getInstance(params) {
+    if (this.instance) {
+      this.instance.disconnect();
+      delete this.instance;
+    }
+
+    this.instance = new CustomPicker(params);
+    return this.instance;
   }
 }

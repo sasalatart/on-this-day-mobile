@@ -47,14 +47,12 @@ export default class DateSelect extends Component {
   }
 
   getPicker = () => (
-    new Picker({
-      onPickerConfirm: (date) => {
-        this.props.loadEpisodes(...date);
-      },
+    Picker.getInstance({
+      onPickerConfirm: date => this.props.loadEpisodes(...date),
       onPickerShow: () => this.setState({ isPickerOpen: true }),
       onPickerHide: () => this.setState({ isPickerOpen: false }),
     })
-  )
+  );
 
   handleAppStateChange = (nextState) => {
     if (nextState === 'active') {
