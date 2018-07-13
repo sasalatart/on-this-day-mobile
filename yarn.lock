@@ -4132,6 +4132,12 @@ react-devtools-core@^2.5.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-collapsible@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-0.12.0.tgz#8ef25f23f4eec72af4a80074b3f534f8605c7f80"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-picker@^4.3.5:
   version "4.3.5"
   resolved "https://registry.yarnpkg.com/react-native-picker/-/react-native-picker-4.3.5.tgz#bf791dde6908028a11aacb3fdc7c6b2bdb2cd3f3"
