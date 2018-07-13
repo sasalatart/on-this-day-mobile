@@ -13,6 +13,7 @@ const persistConfig = {
   transforms: [immutableTransform()],
   key: 'root',
   storage,
+  blacklist: ['router'],
 };
 
 export const history = createHistory();
