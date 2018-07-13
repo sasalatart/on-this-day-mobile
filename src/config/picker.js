@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import { Platform } from 'react-native';
+import times from 'lodash/times';
 import { MONTHS } from '../utils/dates';
 
 const MAIN_FONT_COLOR = [255, 255, 255, 1];
@@ -13,18 +14,18 @@ const TOOLBAR_OPTIONS = {
   pickerTitleColor: TITLE_COLOR,
   pickerConfirmBtnColor: MAIN_FONT_COLOR,
   pickerCancelBtnColor: MAIN_FONT_COLOR,
-  pickerToolBarFontSize: 20,
+  pickerToolBarFontSize: 18,
   pickerToolBarBg: PICKER_TOOLBAR_COLOR,
 };
 
 const PICKER_OPTIONS = {
   pickerFontColor: MAIN_FONT_COLOR,
-  pickerFontSize: 32,
-  pickerRowHeight: 32,
+  pickerFontSize: Platform.OS === 'ios' ? 32 : 20,
+  pickerRowHeight: Platform.OS === 'ios' ? 32 : 20,
   pickerBg: PICKER_BACKGROUND_COLOR,
 };
 
 export const OPTIONS = { ...TOOLBAR_OPTIONS, ...PICKER_OPTIONS };
 
 export const PICKER_DATA = MONTHS
-  .map(monthData => ({ [monthData[0]]: _.times([monthData[1]], num => num + 1) }));
+  .map(monthData => ({ [monthData[0]]: times([monthData[1]], num => num + 1) }));
