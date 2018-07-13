@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.primaryLight,
   },
   selectedTab: {
-    color: 'red',
+    color: theme.colors.gold,
   },
   selectedIconStyle: {
     borderTopWidth: 2,
-    borderTopColor: 'red',
+    borderTopColor: theme.colors.gold,
   },
   text: {
     color: 'white',
