@@ -3,12 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
+  AppState,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import Picker from 'react-native-picker';
 import Button from './Button';
-import { OPTIONS, PICKER_DATA } from '../config/picker';
-import { CURRENT_MONTH, CURRENT_DAY } from '../utils/dates';
+import Picker from '../utils/picker';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -32,32 +31,39 @@ const styles = StyleSheet.create({
 });
 
 export default class DateSelect extends Component {
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    loadEpisodes: PropTypes.func.isRequired,
+  }
 
-    this.state = { isPickerShown: true };
+  state = { isPickerOpen: true };
 
-    this.picker = Picker.init({
-      ...OPTIONS,
-      pickerData: PICKER_DATA,
-      selectedValue: [CURRENT_MONTH, CURRENT_DAY],
+  componentDidMount() {
+    this.picker.show();
+    AppState.addEventListener('change', this.handleAppStateChange);
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this.handleAppStateChange);
+  }
+
+  getPicker = () => (
+    new Picker({
       onPickerConfirm: (date) => {
-        this.setState({ isPickerShown: false });
         this.props.loadEpisodes(...date);
       },
-      onPickerCancel: () => {
-        this.setState({ isPickerShown: false });
-      },
-    });
-    Picker.show();
+      onPickerShow: () => this.setState({ isPickerOpen: true }),
+      onPickerHide: () => this.setState({ isPickerOpen: false }),
+    })
+  )
 
-    this.showPicker = this.showPicker.bind(this);
+  handleAppStateChange = (nextState) => {
+    if (nextState === 'active') {
+      this.picker = this.getPicker();
+      this.picker.show();
+    }
   }
 
-  showPicker() {
-    Picker.show();
-    this.setState({ isPickerShown: true });
-  }
+  picker = this.getPicker();
 
   render() {
     return (
@@ -65,16 +71,12 @@ export default class DateSelect extends Component {
         <View style={styles.wrapper}>
           <Text style={styles.title}>On This Day</Text>
         </View>
-        {!this.state.isPickerShown &&
+        {!this.state.isPickerOpen &&
           <View style={styles.buttonWrapper}>
-            <Button text="Select A Date" onPress={this.showPicker} style={styles.button} />
+            <Button text="Select a Date" onPress={() => this.picker.show()} style={styles.button} />
           </View>
         }
       </View>
     );
   }
 }
-
-DateSelect.propTypes = {
-  loadEpisodes: PropTypes.func.isRequired,
-};
