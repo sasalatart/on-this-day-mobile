@@ -2,6 +2,7 @@ import { Map } from 'immutable';
 import { normalize } from 'normalizr';
 import { createSelector } from 'reselect';
 import { goToDate } from './router';
+import { getEntitiesState } from './entities';
 import { datesSchema } from '../../schemas';
 import { MONTHS } from '../../utils/dates';
 import api from '../../utils/api';
@@ -45,4 +46,23 @@ export const getDatesState = state => state.dates;
 export const getIsLoading = createSelector(
   getDatesState,
   datesState => datesState.get('isLoading'),
+);
+
+export const getDates = createSelector(
+  getEntitiesState,
+  entities => entities.get('dates'),
+);
+
+const getMonthName = (state, params) => params.monthName;
+
+const getDay = (state, params) => params.day;
+
+export const getDate = createSelector(
+  getDates,
+  getMonthName,
+  getDay,
+  (dates, monthName, day) => {
+    const date = dates.get(`${monthName}-${day}`);
+    return date && date.toJS();
+  },
 );

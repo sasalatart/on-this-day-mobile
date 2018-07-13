@@ -1,10 +1,8 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import Spinkit from 'react-native-spinkit';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -15,7 +13,10 @@ const styles = StyleSheet.create({
 });
 
 export default function Spinner({
-  type, size, color, isVisible,
+  type,
+  size,
+  color,
+  isVisible,
 }) {
   return (
     <View style={styles.wrapper}>
@@ -34,6 +35,6 @@ Spinner.propTypes = {
 Spinner.defaultProps = {
   type: 'Wave',
   size: 100,
-  color: '#4b77be',
+  color: theme.colors.primaryLight,
   isVisible: true,
 };

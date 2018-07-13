@@ -1,7 +1,9 @@
 import { Map } from 'immutable';
 import { REHYDRATE } from 'redux-persist/lib/constants';
 
-const INITIAL_STATE = new Map();
+const INITIAL_STATE = new Map({
+  dates: new Map({}),
+});
 
 export default function entitiesReducer(state = INITIAL_STATE, action) {
   if (!action.payload || !action.payload.entities || action.type === REHYDRATE) {
@@ -19,3 +21,5 @@ export default function entitiesReducer(state = INITIAL_STATE, action) {
     state,
   );
 }
+
+export const getEntitiesState = state => state.entities;

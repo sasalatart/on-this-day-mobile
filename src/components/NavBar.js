@@ -8,18 +8,17 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    top: 0,
     width: '100%',
     height: 55,
     marginTop: Platform.OS === 'ios' ? 18 : 0,
-    backgroundColor: 'rgba(31, 71, 136, 0.75)',
+    backgroundColor: theme.colors.primaryDark,
   },
   title: {
     fontSize: 18,

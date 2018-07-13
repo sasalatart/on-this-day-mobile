@@ -1,10 +1,17 @@
 import { connect } from 'react-redux';
-import { getIsLoading } from '../store/ducks/dates';
+import URI from 'urijs';
+import isEmpty from 'lodash/isEmpty';
+import { getIsLoading, getDate } from '../store/ducks/dates';
 import DateComponent from '../components/Date';
+import { monthNumberToName } from '../utils/dates';
 
-function mapStateToProps(state) {
+function mapStateToProps(state, { location: { search } }) {
+  const { month, day } = URI.parseQuery(search);
+  const date = getDate(state, { monthName: monthNumberToName(month), day });
+
   return {
-    isLoading: getIsLoading(state),
+    isLoading: isEmpty(date) && getIsLoading(state),
+    date,
   };
 }
 
