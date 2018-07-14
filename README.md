@@ -9,7 +9,11 @@ React Native mobile app that displays events, births and deaths that occurred in
 
 ## Demo
 
-![demo](https://goo.gl/HNWNCc)
+![demo1](https://goo.gl/Mk4HPU)
+
+![demo2](https://goo.gl/ZcVmr7)
+
+![demo3](https://goo.gl/SPw8gp)
 
 ## Setup
 
