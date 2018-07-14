@@ -1,6 +1,6 @@
 import URI from 'urijs';
 
-const BASE_URL = 'https://onthisdaynext.salatart.com/api';
+const BASE_URL = 'https://onthisday.salatart.com/api';
 
 function getRequest(url) {
   return fetch(url).then(response => response.json());
